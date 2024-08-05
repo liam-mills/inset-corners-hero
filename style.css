@@ -1,0 +1,86 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+:root {
+    --padding: 9px;
+    --border-radius: 30px;
+    --inset-shape-size: 50px;
+    --inset-shape-border-width: 0px;
+    --whitespace-color: #F3F4F5;
+}
+
+body {
+    /* padding: var(--padding); */
+    background: var(--whitespace-color);
+}
+
+.hero {
+    border: var(--padding) solid var(--whitespace-color);
+    border-radius: calc(var(--border-radius) + var(--padding));
+    border-bottom-left-radius: 0;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 100svh;
+    display: grid;
+    place-items: center;
+}
+
+.hero::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #CCD0D4;
+}
+
+.image {
+    z-index: -1;
+    position: fixed;
+    display: block;
+    background: red;
+    width: 300px;
+    height: 300px;
+}
+
+.scroll {
+    width: 400px;
+    border-top-right-radius: var(--border-radius);
+    text-align: center;
+    padding: calc(var(--padding) * 2);
+    background: var(--whitespace-color);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.scroll::before, .scroll::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: calc(var(--inset-shape-size) * 2);
+    height: calc(var(--inset-shape-size) * 2);
+    border-radius: var(--border-radius);
+    box-shadow: calc(-1 * var(--inset-shape-size) / 2) calc(var(--inset-shape-size) / 2) 0 0 var(--whitespace-color);
+    clip-path: polygon(calc(-1 * var(--inset-shape-border-width)) 50%, 50% 50%, 50% calc(100% + var(--inset-shape-border-width)), calc(-1 * var(--inset-shape-border-width)) calc(100% + var(--inset-shape-border-width)));
+}
+
+.scroll::before {
+    left: 0;
+    top: calc(-2 * var(--inset-shape-size));
+}
+
+.scroll::after {
+    bottom: 0;
+    right: calc(-2 * var(--inset-shape-size));
+}
+
+.content {
+    background-color: var(--whitespace-color);
+    padding: var(--padding);
+    height: 100svh;
+}
